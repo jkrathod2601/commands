@@ -1,12 +1,13 @@
 const express= require('express')
 const multer=require('multer')
+const path=require('path')
 
 console.log("---------------------------------------")
 
 const filestorage=multer.diskStorage({
   destination:(req,file,cb)=>{
     req.filesubmission=true
-    cb(null,"taqi_file_save")
+    cb(null,path.join(__dirname,`../../../public/${filename}`))
   },
   filename:(req,file,cb)=>{
     cb(null,file.fieldname+'-'+Date.now() + '-' + Math.round(Math.random() * 1E9)+file.originalname)
@@ -26,4 +27,4 @@ if(file_filter_object[file.fieldname].includes(file.mimetype)){
 let ip=multer({storage:filestorage,fileFilter:filefilter})
 
 
-exports.fileuploadis=ip.fields([{name:"file",maxCount:1}])
+exports.fileuploadis=ip.fields(arrayfileds)

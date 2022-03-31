@@ -1,12 +1,11 @@
 #!/usr/bin/env node
-
 const chalk = require("chalk");
 const reader = require("readline-sync");
 const fs = require("fs");
 var inquirer = require("inquirer");
 const path = require("path");
 
-let module_file=fs.readdirSync(path.join(__dirname,"../../api"))
+let module_file=fs.readdirSync(path.join(__dirname,"../../../api"))
 let array_fields=[]
 let filter_object={}
 
@@ -30,9 +29,27 @@ async function run() {
   let filename=selectmiddlewarename.filename+'.js'
   console.log(filename)
 
-  let f_array=fs.readdirSync(path.join(__dirname,`../../api/${selectmodule.modelis}/middleware`))
+  let f_array=fs.readdirSync(path.join(__dirname,`../../../api/${selectmodule.modelis}/middleware`))
+
+  let public_list=fs.readdirSync=(path.join(__dirname,"../../../public"))
 
   if (!f_array.includes(selectmodule.modelis)) {
+
+    const foldername = await inquirer.prompt([
+      {
+        type: "input",
+        name: "folderis",
+        message: "add a folder name for a file storage",
+      },
+    ]);
+
+    try{
+        fs.mkdirSync(path.join(__dirname,`../../../public/${foldername.folderis}`))
+    }catch(err){
+      console.log(chalk.red(err))
+    }
+    
+
     const data = await inquirer.prompt([
       {
         type: "input",
@@ -63,21 +80,16 @@ async function run() {
       filter_object[nameis.namefiled] = gaindata;
     }
 
-    let datastring=`const file_filter_object=${JSON.stringify(filter_object)};`+
+
+
+    let datastring=`const filename="${foldername.folderis}";`+`const file_filter_object=${JSON.stringify(filter_object)};`+
       `const arrayfileds=${JSON.stringify(array_fields)};`
     +fs.readFileSync(path.join(__dirname,"../files/file_upload_module.js"),'utf-8')
 
-    fs.writeFileSync(path.join(__dirname,`../../api/${selectmodule.modelis}/middleware/${filename}`),datastring)
+    fs.writeFileSync(path.join(__dirname,`../../../api/${selectmodule.modelis}/middleware/${filename}`),datastring)
   } else {
-    console.log(chalk.red("file is allready present in database"));
+    console.log(chalk.red("file is allready present in middlewAare folder"));
   }
-
-
-
-
-  
-
-  
 }
 
 run();

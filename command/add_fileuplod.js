@@ -6,7 +6,7 @@ const fs = require("fs");
 var inquirer = require("inquirer");
 const path = require("path");
 let array_file = fs.readdirSync(
-  path.join(__dirname, "../../../Node_Js_Cybercom")
+  path.join(__dirname, "../../../../Node_Js_Cybercom")
 );
 
 const checkfileapply = async () => {
@@ -41,7 +41,13 @@ async function run() {
     ]);
     if (datais.filename == "yes") {
       let filestorageobjectstring = 'const filename="savefile";';
-      fs.mkdirSync(path.join(__dirname, "../../savefile"));
+
+      try {
+        fs.mkdirSync(path.join(__dirname, "../../../public/savefile"));
+      } catch (error) {
+        console.log(chalk.red(error))
+      }
+     
       const strinapply = await checkfileapply();
       let add_file_upload_string = `const allow_file_upload_array= ${strinapply};`;
       let stringdata =
@@ -52,7 +58,7 @@ async function run() {
           "utf-8"
         );
       fs.writeFileSync(
-        path.join(__dirname, "../../core/corefileupload.js"),
+        path.join(__dirname, "../../../core/corefileupload.js"),
         stringdata
       );
     } else {
@@ -60,7 +66,7 @@ async function run() {
         "enter the file name foldername for the storing a files"
       );
       if (!array_file.includes(answer)) {
-        fs.mkdirSync(path.join(__dirname, `../../${answer}`));
+        fs.mkdirSync(path.join(__dirname, `../../../public/${answer}`));
         filestorageobjectstring = `const filename="${answer}";`;
         const strinapply = await checkfileapply();
         let add_file_upload_string = `const allow_file_upload_array= ${strinapply};`;
@@ -72,7 +78,7 @@ async function run() {
             "utf-8"
           );
         fs.writeFileSync(
-          path.join(__dirname, "../../core/corefileupload.js"),
+          path.join(__dirname, "../../../core/corefileupload.js"),
           stringdata
         );
       } else {
