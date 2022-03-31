@@ -1,4 +1,4 @@
-let listofcommand={
+{
 	"command": "./bin/git_command/command/list_command.js",
     "command-addmodule": "./bin/git_command/command/add_module.js",
     "command-addauth": "./bin/git_command/command/add_auth.js",
