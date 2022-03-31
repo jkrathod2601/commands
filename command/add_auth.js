@@ -23,7 +23,7 @@ const sequelize = new Sequelize(
 
 const queryInterface = sequelize.getQueryInterface();
 
-require("../../database/models/index");
+require("../../../database/models/index");
 
 try {
   console.log(chalk.blue("with use of database"), "====>", chalk.yellow("1"));
@@ -38,7 +38,7 @@ try {
       "utf-8"
     );
     fs.writeFileSync(
-      path.join(__dirname, "../../core/core_controller.js"),
+      path.join(__dirname, "../../../core/core_controller.js"),
       file_data
     );
     console.log("successfully added static authentication");
@@ -54,7 +54,7 @@ try {
         "utf-8"
       );
       fs.writeFileSync(
-        path.join(__dirname, "../../database/models/user_model.js"),
+        path.join(__dirname, "../../../database/models/user_model.js"),
         user_model
       );
       let user_migration = fs.readFileSync(
@@ -62,7 +62,7 @@ try {
         "utf-8"
       );
       fs.writeFileSync(
-        path.join(__dirname, "../../database/migrations/user_migration.js"),
+        path.join(__dirname, "../../../database/migrations/user_migration.js"),
         user_migration
       );
 
@@ -72,7 +72,7 @@ try {
       );
       let model_string = `let modelname = "masterusers";` + file_data;
       fs.writeFileSync(
-        path.join(__dirname, "../../core/core_controller.js"),
+        path.join(__dirname, "../../../core/core_controller.js"),
         model_string
       );
 
@@ -82,7 +82,7 @@ try {
       );
       // console.log(file_data)
       fs.writeFileSync(
-        path.join(__dirname, "../../core/3rd_authentication/passport_setup.js"),
+        path.join(__dirname, "../../../core/3rd_authentication/passport_setup.js"),
         file_data
       );
 
@@ -92,7 +92,7 @@ try {
       );
       let add_string = `let modelname = "masterusers";` + file_data;
       fs.writeFileSync(
-        path.join(__dirname, "../../core/3rd_authentication/auth_social.js"),
+        path.join(__dirname, "../../../core/3rd_authentication/auth_social.js"),
         add_string
       );
 
@@ -102,7 +102,7 @@ try {
       );
       add_string = `let modelname = "masterusers";` + file_data;
       fs.writeFileSync(
-        path.join(__dirname, "../../service/checksocialauth.js"),
+        path.join(__dirname, "../../../service/checksocialauth.js"),
         add_string
       );
       console.log(chalk.green("successfully added 3 rd party authentication"));
@@ -228,7 +228,7 @@ try {
           model_string =
             `let modelname = "${dynamic_db_obj[answer]}";` + file_data;
           fs.writeFileSync(
-            path.join(__dirname, "../../core/core_controller.js"),
+            path.join(__dirname, "../../../core/core_controller.js"),
             model_string
           );
 
@@ -304,7 +304,7 @@ try {
                 fs.writeFileSync(
                   path.join(
                     __dirname,
-                    "../../core/3rd_authentication/passport_setup.js"
+                    "../../../core/3rd_authentication/passport_setup.js"
                   ),
                   file_data
                 );
@@ -317,7 +317,7 @@ try {
                 fs.writeFileSync(
                   path.join(
                     __dirname,
-                    "../../core/3rd_authentication/auth_social.js"
+                    "../../../core/3rd_authentication/auth_social.js"
                   ),
                   add_string
                 );
@@ -328,7 +328,7 @@ try {
                 );
                 add_string = `let modelname = "${model_name}";` + file_data;
                 fs.writeFileSync(
-                  path.join(__dirname, "../../service/checksocialauth.js"),
+                  path.join(__dirname, "../../../service/checksocialauth.js"),
                   add_string
                 );
                 console.log(
